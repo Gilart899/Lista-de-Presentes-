@@ -1,355 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Presentes — Cris & Edson</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg-start: #fffdf6;
-      --bg-end: #fffaf0;
-      --card: #ffffff;
-      --muted:#6b6b6b;
-      --gold-1:#cfa34a;
-      --gold-2:#b8860b;
-      --accent:#0f172a;
-      --shadow: 0 12px 36px rgba(11,15,31,0.08);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
-      color:var(--accent);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:32px;
-      display:flex;
-      justify-content:center;
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #fffbea, #f6e3b4);
+      color: #2c2c2c;
     }
 
-    .wrap{
-      width:100%;
-      max-width:1100px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
-      border-radius:18px;
-      box-shadow: var(--shadow);
-      padding:28px;
-      border:1px solid rgba(184,154,89,0.06);
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:18px;
-      margin-bottom:20px;
+    header h1 {
+      color: #bfa14a;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
-    .brand{display:flex;gap:16px;align-items:center}
-    .monogram{
-      width:72px;height:72px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      background: linear-gradient(135deg,var(--gold-1),var(--gold-2));
-      color:#fff;font-family:"Playfair Display",serif;font-weight:700;font-size:18px;
-      box-shadow:0 8px 22px rgba(184,134,11,0.18);
-    }
-    h1{
-      margin:0;font-family:"Playfair Display",serif;font-weight:600;font-size:20px;color:var(--accent)
-    }
-    header p{margin:0;color:var(--muted);font-size:13px;max-width:640px}
-
-    .contact{text-align:right;font-size:13px;color:var(--muted)}
-    .contact .phone{display:block;font-weight:700;color:var(--accent);margin-top:6px}
-
-    /* grid */
-    .grid{display:flex;flex-direction:column;gap:14px}
-
-    /* card: image left, content right on wide screens */
-    .card{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:14px;
-      border:1px solid rgba(184,154,89,0.05);
-      box-shadow:0 8px 24px rgba(11,15,31,0.04);
+    header p {
+      font-size: 1rem;
+      color: #444;
     }
 
-    .thumb{
-      width:210px;
-      height:140px;
-      flex-shrink:0;
-      border-radius:12px;
-      overflow:hidden;
-      background:#f3f3f3;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
     }
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 
-    .content{flex:1;display:flex;flex-direction:column;gap:8px}
-    .title{font-family:"Playfair Display",serif;font-weight:600;font-size:16px;color:#0b1220}
-    .desc{color:var(--muted);font-size:13px}
-    .meta{display:flex;align-items:center;gap:12px;margin-top:6px}
-
-    .status{
-      padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;
+    .gift-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: #fffdf7;
+      border: 1px solid #e6d59e;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
-    .available{background:linear-gradient(90deg, rgba(233,236,229,0.6), rgba(250,245,238,0.6)); color:#065f46}
-    .chosen{background:linear-gradient(90deg, rgba(255,252,241,1), rgba(250,245,238,0.8)); color:var(--muted)}
 
-    .actions{margin-left:auto;display:flex;gap:10px;align-items:center}
-    .btn{
-      border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;
-      box-shadow:0 6px 18px rgba(11,15,31,0.04);
+    .gift-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #f3e5a3;
+      margin-right: 1rem;
     }
-    .btn-choose{background:linear-gradient(90deg,var(--gold-1),var(--gold-2));color:#fff}
-    .btn-disabled{background:transparent;color:var(--muted);border:1px solid rgba(11,15,31,0.04)}
 
-    /* footer controls */
-    footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-    .controls{display:flex;gap:10px}
+    .gift-info {
+      flex: 1;
+      min-width: 250px;
+    }
 
-    /* modal */
-    .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(11,15,31,0.45);z-index:60}
-    .modal{background:var(--card);border-radius:12px;padding:18px;width:100%;max-width:460px;border:1px solid rgba(184,154,89,0.06)}
-    .modal h3{margin:0 0 8px 0;font-family:"Playfair Display",serif;font-size:18px;color:var(--accent)}
-    .input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(11,15,31,0.06);margin-top:8px}
+    .gift-info h3 {
+      margin: 0;
+      color: #2c2c2c;
+    }
 
-    @media (max-width:860px){
-      .card{flex-direction:column;align-items:stretch}
-      .thumb{width:100%;height:200px}
-      .actions{justify-content:flex-end}
+    .gift-info p {
+      color: #7a7a7a;
+      margin: 0.3rem 0;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      background: #e4d18f;
+      color: #fff;
+    }
+
+    button {
+      background: #bfa14a;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #a58d3b;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .gift-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .gift-card img {
+        margin: 0 0 1rem 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap" role="application" aria-label="Lista de Presentes Cris e Edson">
-    <header>
-      <div class="brand">
-        <div class="monogram" aria-hidden="true">C & E</div>
-        <div>
-          <h1>Lista de Presentes — Cris & Edson</h1>
-          <p>Escolha um presente da lista. Ao confirmar, o botão abrirá o WhatsApp com mensagem automática para confirmação.</p>
-        </div>
-      </div>
-      <div class="contact">
-        <div class="tiny">Confirmação via WhatsApp</div>
-        <div class="phone">+55 79 99914-5044</div>
-      </div>
-    </header>
+  <header>
+    <h1>Lista de Presentes — Cris & Edson 💍</h1>
+    <p>Escolha um presente e confirme pelo WhatsApp.<br>Assim evitamos presentes repetidos e agradecemos com carinho!</p>
+  </header>
 
-    <main>
-      <section id="grid" class="grid" aria-live="polite"></section>
-    </main>
+  <div class="container" id="giftList"></div>
 
-    <footer>
-      <div class="tiny">Dica: abra no celular para que o botão direcione direto ao WhatsApp.</div>
-      <div class="controls">
-        <button id="export" class="btn btn-disabled">Exportar CSV</button>
-        <button id="reset" class="btn btn-disabled">Reiniciar lista</button>
-      </div>
-    </footer>
-  </div>
-
-  <!-- Modal -->
-  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <h3>Confirmar presente</h3>
-      <div id="modal-item" class="desc">—</div>
-      <label for="guest" style="margin-top:12px;display:block;color:var(--muted);font-size:13px">Seu nome (para aparecer na lista)</label>
-      <input id="guest" class="input" type="text" placeholder="Digite seu nome completo" />
-      <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:12px">
-        <button id="cancel" class="btn btn-disabled">Cancelar</button>
-        <button id="confirm" class="btn btn-choose">Enviar pelo WhatsApp</button>
-      </div>
-    </div>
-  </div>
+  <footer>
+    Feito com 💛 para Cris & Edson — Confirmação via WhatsApp: <strong>79 9 9914-5044</strong>
+  </footer>
 
   <script>
-    /* Número de confirmação (sem + ou espaços) */
-    const WHATSAPP_NUMBER = '5579999145044';
-
-    /* Lista de itens com URLs de imagens (Unsplash queries para fotos limpas) */
-    const initialItems = [
-      { name: 'Garrafa térmica/ café (Branca)', img: 'https://source.unsplash.com/600x400/?thermos,coffee,white' },
-      { name: 'Sanduicheira elétrica (preta)', img: 'https://source.unsplash.com/600x400/?sandwich,grill,kitchen' },
-      { name: 'Liquidificador (preto)', img: 'https://source.unsplash.com/600x400/?blender,kitchen,appliance' },
-      { name: 'Conjuntos de copos', img: 'https://source.unsplash.com/600x400/?glasses,glassware,set' },
-      { name: 'Espremedor de frutas (preto)', img: 'https://source.unsplash.com/600x400/?juicer,fruit,kitchen' },
-      { name: 'Xícaras com Pires (brancas)', img: 'https://source.unsplash.com/600x400/?cup,saucer,tea,white' },
-      { name: 'Jogo de potes herméticos (preto)', img: 'https://source.unsplash.com/600x400/?storage,containers,kitchen' },
-      { name: 'Jarra de suco (vidro)', img: 'https://source.unsplash.com/600x400/?pitcher,juice,glass' },
-      { name: 'Jogo de Frigideiras (antiaderente)', img: 'https://source.unsplash.com/600x400/?frying,pans,cookware' },
-      { name: 'Kit galheteiro com suporte (Óleo azeite e vinagre)', img: 'https://source.unsplash.com/600x400/?oil,olive,condiments' },
-      { name: 'Kit de forma para bolo', img: 'https://source.unsplash.com/600x400/?baking,pans,cake' },
-      { name: 'Jogo de utensílios silicone (preto)', img: 'https://source.unsplash.com/600x400/?utensils,kitchen,silicone' },
-      { name: 'Cobre leito (Queen)', img: 'https://source.unsplash.com/600x400/?bedspread,bedroom,linen' },
-      { name: 'Cobertor', img: 'https://source.unsplash.com/600x400/?blanket,cozy,blanket' },
-      { name: 'Edredom solteiro', img: 'https://source.unsplash.com/600x400/?duvet,bed,comforter' },
-      { name: 'Kit toalha de banho', img: 'https://source.unsplash.com/600x400/?bath,towels,set' },
-      { name: 'Kit toalhas de rosto', img: 'https://source.unsplash.com/600x400/?face,towels,bathroom' },
-      { name: 'Manta para sofá (Off-white) branco', img: 'https://source.unsplash.com/600x400/?throw,blanket,sofa' }
+    const phone = "5579999145044";
+    const gifts = [
+      { name: "Garrafa térmica / café (Branca)", image: "https://images.unsplash.com/photo-1606813909361-4a19b6f8b0af?auto=format&fit=crop&w=500&q=60" },
+      { name: "Sanduicheira elétrica (Preta)", image: "https://images.unsplash.com/photo-1606819249685-5f6217b47a9f?auto=format&fit=crop&w=500&q=60" },
+      { name: "Liquidificador (Preto)", image: "https://images.unsplash.com/photo-1609981542213-4b0565e8f8a3?auto=format&fit=crop&w=500&q=60" },
+      { name: "Conjunto de copos", image: "https://images.unsplash.com/photo-1606813909361-4a19b6f8b0af?auto=format&fit=crop&w=500&q=60" },
+      { name: "Espremedor de frutas (Preto)", image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=500&q=60" },
+      { name: "Xícaras com pires (Brancas)", image: "https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?auto=format&fit=crop&w=500&q=60" },
+      { name: "Jogo de potes herméticos", image: "https://images.unsplash.com/photo-1600282278399-c93a73f6b5f9?auto=format&fit=crop&w=500&q=60" },
+      { name: "Jarra de suco (Vidro)", image: "https://images.unsplash.com/photo-1565958011705-44e21150a37e?auto=format&fit=crop&w=500&q=60" },
+      { name: "Jogo de frigideiras (antiaderente)", image: "https://images.unsplash.com/photo-1584799585338-9a3f63b6f2b4?auto=format&fit=crop&w=500&q=60" },
+      { name: "Cobre leito (Queen)", image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=500&q=60" }
     ];
 
-    const STORAGE_KEY = 'lista_presentes_cris_edson_gold_v1';
+    const giftList = document.getElementById('giftList');
 
-    function loadState(){
-      try{
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if(!raw) return initialItems.map(it => ({ name: it.name, img: it.img, chosen:false, by:'' }));
-        const parsed = JSON.parse(raw);
-        // If stored items missing images (older version), map them
-        return parsed.map((p, i) => ({ name: p.name || initialItems[i].name, img: p.img || initialItems[i]?.img || '', chosen: !!p.chosen, by: p.by || '' }));
-      } catch(e){
-        return initialItems.map(it => ({ name: it.name, img: it.img, chosen:false, by:'' }));
-      }
-    }
+    gifts.forEach(gift => {
+      const card = document.createElement('div');
+      card.classList.add('gift-card');
+      card.innerHTML = `
+        <img src="${gift.image}" alt="${gift.name}">
+        <div class="gift-info">
+          <h3>${gift.name}</h3>
+          <p class="status">Disponível</p>
+          <button>Escolher este presente</button>
+        </div>
+      `;
 
-    function saveState(state){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
+      const button = card.querySelector('button');
+      const status = card.querySelector('.status');
 
-    let items = loadState();
-    const grid = document.getElementById('grid');
-    const modalBackdrop = document.getElementById('modal');
-    const modalItem = document.getElementById('modal-item');
-    const guestInput = document.getElementById('guest');
-    const btnConfirm = document.getElementById('confirm');
-    const btnCancel = document.getElementById('cancel');
-    let currentIndex = null;
-
-    function render(){
-      grid.innerHTML = '';
-      items.forEach((it, idx) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        // Thumb (left)
-        const thumb = document.createElement('div');
-        thumb.className = 'thumb';
-        const img = document.createElement('img');
-        img.src = it.img;
-        img.alt = it.name;
-        thumb.appendChild(img);
-        card.appendChild(thumb);
-
-        // Content (right)
-        const content = document.createElement('div');
-        content.className = 'content';
-
-        const title = document.createElement('div');
-        title.className = 'title';
-        title.textContent = it.name;
-        content.appendChild(title);
-
-        const desc = document.createElement('div');
-        desc.className = 'desc';
-        desc.textContent = it.chosen ? `Presente escolhido por ${it.by}` : 'Disponível';
-        content.appendChild(desc);
-
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-
-        const badge = document.createElement('span');
-        badge.className = 'status ' + (it.chosen ? 'chosen' : 'available');
-        badge.textContent = it.chosen ? 'Escolhido' : 'Disponível';
-        meta.appendChild(badge);
-
-        const actions = document.createElement('div');
-        actions.className = 'actions';
-
-        if(!it.chosen){
-          const btn = document.createElement('button');
-          btn.className = 'btn btn-choose';
-          btn.textContent = 'Escolher este presente';
-          btn.addEventListener('click', () => openModal(idx));
-          actions.appendChild(btn);
-        } else {
-          const btn = document.createElement('button');
-          btn.className = 'btn btn-disabled';
-          btn.textContent = 'Já escolhido';
-          btn.disabled = true;
-          actions.appendChild(btn);
+      button.addEventListener('click', () => {
+        const nome = prompt("Digite seu nome para confirmar o presente 🎁:");
+        if (nome) {
+          status.textContent = `Presente escolhido por ${nome}`;
+          status.style.background = "#9dc183";
+          button.disabled = true;
+          button.style.background = "#ccc";
+          const mensagem = `Olá Cris & Edson! Eu, ${nome}, escolhi o presente ${gift.name} 🎁`;
+          const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensagem)}`;
+          window.open(url, "_blank");
         }
-
-        meta.appendChild(actions);
-        content.appendChild(meta);
-        card.appendChild(content);
-        grid.appendChild(card);
       });
-    }
 
-    function openModal(index){
-      currentIndex = index;
-      modalItem.textContent = items[index].name;
-      guestInput.value = '';
-      modalBackdrop.style.display = 'flex';
-      modalBackdrop.setAttribute('aria-hidden','false');
-      setTimeout(()=>guestInput.focus(), 80);
-    }
-
-    function closeModal(){
-      modalBackdrop.style.display = 'none';
-      modalBackdrop.setAttribute('aria-hidden','true');
-      currentIndex = null;
-    }
-
-    btnCancel.addEventListener('click', closeModal);
-
-    btnConfirm.addEventListener('click', () => {
-      const name = guestInput.value.trim();
-      if(!name){ alert('Por favor, digite seu nome para que possamos agradecer.'); guestInput.focus(); return; }
-      const item = items[currentIndex];
-      items[currentIndex].chosen = true;
-      items[currentIndex].by = name;
-      saveState(items);
-      render();
-      closeModal();
-
-      const text = encodeURIComponent(`Olá Cris e Edson! Quero confirmar que escolhi o presente: ${item.name}. Com carinho, ${name}.`);
-      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
-      // abrir WhatsApp em nova aba (no celular abrirá no app)
-      window.open(waUrl, '_blank');
+      giftList.appendChild(card);
     });
-
-    // Reiniciar
-    document.getElementById('reset').addEventListener('click', () => {
-      if(!confirm('Tem certeza que deseja reiniciar a lista? Todos os nomes salvos localmente serão removidos.')) return;
-      items = initialItems.map(it => ({ name: it.name, img: it.img, chosen:false, by:'' }));
-      saveState(items);
-      render();
-    });
-
-    // Export CSV
-    document.getElementById('export').addEventListener('click', () => {
-      const rows = [['Presente','Status','Presente dado por']];
-      items.forEach(i => rows.push([i.name, i.chosen ? 'Escolhido' : 'Disponível', i.by]));
-      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'lista-presentes-cris-edson.csv';
-      a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    // Inicializa
-    render();
-
-    // Fechar modal com ESC ou clicando fora
-    window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
-    modalBackdrop.addEventListener('click', (e) => { if(e.target === modalBackdrop) closeModal(); });
   </script>
 </body>
 </html>
