@@ -1,0 +1,182 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lista de Presentes - Cris & Edson</title>
+  <style>
+    :root{--bg:#f7f8fa;--card:#fff;--muted:#6b7280;--accent:#0f172a;--accent-2:#0ea5a4}
+    *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#ffffff);color:var(--accent);padding:24px;}
+    .wrap{max-width:900px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    header h1{font-size:20px;margin:0}
+    header p{margin:0;color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 18px rgba(11,15,31,0.06);}
+.title{font-weight:600;margin-bottom:8px}
+.muted{color:var(--muted);font-size:13px;margin-bottom:12px}
+.status{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px}
+.available{background:#eefdfc;color:#064e4a}
+.chosen{background:#f2f4f8;color:#1f2937}
+button{appearance:none;border:0;padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+.btn-choose{background:linear-gradient(90deg,var(--accent-2),#06b6d4);color:white}
+.btn-disabled{background:#eef2ff;color:#4338ca}
+.small{font-size:13px}
+
+footer{margin-top:22px;color:var(--muted);font-size:13px}
+
+.modal-backdrop{position:fixed;inset:0;background:rgba(11,15,31,0.45);display:flex;align-items:center;justify-content:center}
+.modal{background:var(--card);padding:18px;border-radius:12px;max-width:420px;width:100%}
+.row{display:flex;gap:8px}
+input[type=text]{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ef}
+.controls{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+@media (max-width:480px){body{padding:14px}header h1{font-size:18px}}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Lista de Presentes — Cris & Edson</h1>
+        <p>Escolha um presente e confirme pelo WhatsApp. Itens já escolhidos aparecem com o nome do convidado.</p>
+      </div>
+      <div class="small">WhatsApp: +55 79 99914-5044</div>
+    </header><section id="list" class="grid" aria-live="polite"></section>
+
+<footer>
+  <div class="muted">Abra o site no celular para enviar a confirmação pelo WhatsApp automaticamente.</div>
+  <div style="margin-top:8px" class="muted">Os itens são salvos no seu navegador. Clique em "Reiniciar lista" para limpar.</div>
+  <div style="margin-top:12px">
+    <button id="reset" style="background:#fff;border:1px solid #e6e9ef;padding:8px 12px;border-radius:8px">Reiniciar lista</button>
+    <button id="export" style="margin-left:8px;background:#fff;border:1px solid #e6e9ef;padding:8px 12px;border-radius:8px">Exportar CSV</button>
+  </div>
+</footer>
+
+  </div>  <div id="modal" style="display:none" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div style="font-weight:700;margin-bottom:8px">Confirmar presente</div>
+      <div id="modal-item" class="muted small"></div>
+      <div style="margin-top:10px" class="small">Seu nome (para aparecer na lista)</div>
+      <div style="margin-top:8px" class="row">
+        <input id="guestName" type="text" placeholder="Seu nome completo" />
+      </div>
+      <div class="controls">
+        <button id="cancel">Cancelar</button>
+        <button id="confirm" class="btn-choose">Enviar pelo WhatsApp</button>
+      </div>
+    </div>
+  </div>  <script>
+    const WHATSAPP_NUMBER = '5579999145044';
+
+    const initialItems = [
+      'Garrafa térmica/ café (Branca)',
+      'Sanduicheira elétrica (preta)',
+      'Liquidificador (preto)',
+      'Conjuntos de copos',
+      'Espremedor de frutas (preto)',
+      'Xícaras com Pires (brancas)',
+      'Jogo de potes herméticos (preto)',
+      'Jarra de suco (vidro)',
+      'Jogo de Frigideiras (antiaderente)',
+      'Kit galheteiro com suporte (Óleo azeite e vinagre)',
+      'Kit de forma para bolo',
+      'Jogo de utensílios silicone (preto)',
+      'Cobre leito (Queen)',
+      'Cobertor',
+      'Edredom solteiro',
+      'Kit toalha de banho',
+      'Kit toalhas de rosto',
+      'Manta para sofá (Off-white) branco'
+    ];
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem('lista-presentes-cris-edson');
+        if(!raw) return initialItems.map(name=>({name, chosen:false, by:''}));
+        return JSON.parse(raw);
+      }catch(e){
+        return initialItems.map(name=>({name, chosen:false, by:''}));
+      }
+    }
+    function saveState(state){ localStorage.setItem('lista-presentes-cris-edson', JSON.stringify(state)); }
+
+    let items = loadState();
+    const listEl = document.getElementById('list');
+    const modal = document.getElementById('modal');
+    const modalItem = document.getElementById('modal-item');
+    const guestNameInput = document.getElementById('guestName');
+    let currentIndex = null;
+
+    function render(){
+      listEl.innerHTML = '';
+      items.forEach((it, idx)=>{
+        const card = document.createElement('div'); card.className='card';
+        const title = document.createElement('div'); title.className='title'; title.textContent = it.name; card.appendChild(title);
+        const status = document.createElement('div'); status.className='muted';
+        const statusBadge = document.createElement('span'); statusBadge.className='status ' + (it.chosen ? 'chosen' : 'available');
+        statusBadge.textContent = it.chosen ? ('Escolhido por ' + it.by) : 'Disponível';
+        status.appendChild(statusBadge); card.appendChild(status);
+
+        const actions = document.createElement('div'); actions.style.marginTop='12px';
+        if(!it.chosen){
+          const btn = document.createElement('button'); btn.className='btn-choose'; btn.textContent='Escolher este presente';
+          btn.addEventListener('click', ()=>openModal(idx));
+          actions.appendChild(btn);
+        } else {
+          const edit = document.createElement('button'); edit.className='btn-disabled'; edit.textContent='Já escolhido'; edit.disabled=true;
+          actions.appendChild(edit);
+        }
+
+        card.appendChild(actions);
+        listEl.appendChild(card);
+      });
+    }
+
+    function openModal(idx){
+      currentIndex = idx;
+      modalItem.textContent = items[idx].name;
+      guestNameInput.value = '';
+      modal.style.display = 'flex';
+      guestNameInput.focus();
+    }
+
+    function closeModal(){ modal.style.display='none'; currentIndex=null; }
+
+    document.getElementById('cancel').addEventListener('click', ()=>closeModal());
+
+    document.getElementById('confirm').addEventListener('click', ()=>{
+      const name = guestNameInput.value.trim();
+      if(!name){ alert('Por favor, digite seu nome.'); guestNameInput.focus(); return; }
+      const item = items[currentIndex];
+      const text = encodeURIComponent(`Olá Cris e Edson! Quero confirmar que escolhi o presente: ${item.name}. Com carinho, ${name}.`);
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+      items[currentIndex].chosen = true;
+      items[currentIndex].by = name;
+      saveState(items);
+      render();
+      closeModal();
+      window.open(waUrl, '_blank');
+    });
+
+    document.getElementById('reset').addEventListener('click', ()=>{
+      if(!confirm('Tem certeza que deseja reiniciar a lista?')) return;
+      items = initialItems.map(name=>({name, chosen:false, by:''}));
+      saveState(items);
+      render();
+    });
+
+    document.getElementById('export').addEventListener('click', ()=>{
+      const rows = [['Presente','Status','Presente dado por']];
+      items.forEach(i=>rows.push([i.name, i.chosen ? 'Escolhido' : 'Disponível', i.by]));
+      const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv],{type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='lista-presentes-cris-edson.csv'; a.click(); URL.revokeObjectURL(url);
+    });
+
+    render();
+  </script></body>
+</html>
