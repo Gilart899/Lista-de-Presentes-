@@ -9,89 +9,86 @@
       font-family: 'Georgia', serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to bottom, #fffaf3, #fbead0);
-      background-image: url('https://i.ibb.co/2qyx9gK/floral-bg-gold.png');
-      background-repeat: repeat;
-      color: #3a2f1f;
+      background: linear-gradient(to bottom right, #fffbea, #f6e3b4);
+      color: #2c2c2c;
     }
 
     header {
       text-align: center;
-      padding: 2rem 1rem 1rem 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border-bottom: 2px solid #d7c78b;
+      padding: 2rem 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
     header h1 {
       color: #bfa14a;
-      font-size: 2.2rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
-    }
-
-    header h1::after {
-      content: " 💍";
     }
 
     header p {
       font-size: 1rem;
-      color: #4f4735;
+      color: #444;
     }
 
     .container {
-      max-width: 950px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 1rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
     }
 
     .gift-card {
-      background: #fffdf8;
-      border: 1px solid #e9dba8;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-    }
-
-    .gift-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: #fffdf7;
+      border: 1px solid #e6d59e;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .gift-card img {
-      width: 100%;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #f3e5a3;
+      margin-right: 1rem;
       background-color: #fff;
     }
 
     .gift-info {
-      padding: 1rem;
+      flex: 1;
+      min-width: 250px;
     }
 
     .gift-info h3 {
+      margin: 0;
+      color: #2c2c2c;
+    }
+
+    .gift-info p {
+      color: #7a7a7a;
       margin: 0.3rem 0;
-      color: #3a2f1f;
-      font-size: 1.1rem;
     }
 
     .status {
       display: inline-block;
-      margin: 0.5rem 0;
-      font-size: 0.85rem;
-      padding: 0.3rem 0.7rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 20px;
-      background: #e6d59e;
+      background: #e4d18f;
       color: #fff;
     }
 
     button {
       background: #bfa14a;
       border: none;
-      padding: 0.6rem 1rem;
+      padding: 0.6rem 1.2rem;
       color: white;
       border-radius: 8px;
       cursor: pointer;
@@ -100,42 +97,53 @@
     }
 
     button:hover {
-      background: #a78f3b;
+      background: #a58d3b;
     }
 
     footer {
       text-align: center;
       padding: 1rem;
-      color: #5c533c;
       font-size: 0.9rem;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .gift-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .gift-card img {
+        margin: 0 0 1rem 0;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Lista de Presentes — Cris & Edson</h1>
+    <h1>Lista de Presentes — Cris & Edson 💍</h1>
     <p>Escolha um presente e confirme pelo WhatsApp.<br>Assim evitamos presentes repetidos e agradecemos com carinho!</p>
   </header>
 
   <div class="container" id="giftList"></div>
 
   <footer>
-    💛 Com amor, Cris & Edson — WhatsApp de confirmação: <strong>79 9 9914-5044</strong>
+    Feito com 💛 para Cris & Edson — Confirmação via WhatsApp: <strong>79 9 9914-5044</strong>
   </footer>
 
   <script>
     const phone = "5579999145044";
     const gifts = [
-      { name: "Garrafa térmica / café (Branca)", image: "https://images.unsplash.com/photo-1601050690597-1f5b7a9ec7dc?auto=format&fit=crop&w=800&q=80" },
-      { name: "Sanduicheira elétrica (Preta)", image: "https://images.unsplash.com/photo-1606813902912-9fef8f98a1e8?auto=format&fit=crop&w=800&q=80" },
-      { name: "Liquidificador (Preto)", image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80" },
-      { name: "Conjunto de copos", image: "https://images.unsplash.com/photo-1603190287605-e06a6c3100a5?auto=format&fit=crop&w=800&q=80" },
-      { name: "Espremedor de frutas (Preto)", image: "https://images.unsplash.com/photo-1615485293864-b2f1a13c0e3f?auto=format&fit=crop&w=800&q=80" },
-      { name: "Xícaras com pires (Brancas)", image: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" },
-      { name: "Jogo de potes herméticos", image: "https://images.unsplash.com/photo-1619198734698-6b52e299c24e?auto=format&fit=crop&w=800&q=80" },
-      { name: "Jarra de suco (Vidro)", image: "https://images.unsplash.com/photo-1619537903514-3e5098c9778a?auto=format&fit=crop&w=800&q=80" },
-      { name: "Jogo de frigideiras (Antiaderente)", image: "https://images.unsplash.com/photo-1603052875291-61e982ce45e6?auto=format&fit=crop&w=800&q=80" },
-      { name: "Cobre leito (Queen)", image: "https://images.unsplash.com/photo-1616627563546-8df07a9b8f22?auto=format&fit=crop&w=800&q=80" }
+      { name: "Garrafa térmica / café (Branca)", image: "https://m.media-amazon.com/images/I/61IRN8xxPpL._AC_SL1500_.jpg" },
+      { name: "Sanduicheira elétrica (Preta)", image: "https://m.media-amazon.com/images/I/71ZCKbTwT7L._AC_SL1500_.jpg" },
+      { name: "Liquidificador (Preto)", image: "https://m.media-amazon.com/images/I/61m4bFhSaaL._AC_SL1500_.jpg" },
+      { name: "Conjunto de copos", image: "https://m.media-amazon.com/images/I/61COQ6a+8tL._AC_SL1500_.jpg" },
+      { name: "Espremedor de frutas (Preto)", image: "https://m.media-amazon.com/images/I/61C3wovH7fL._AC_SL1500_.jpg" },
+      { name: "Xícaras com pires (Brancas)", image: "https://m.media-amazon.com/images/I/61a+U5uVmUL._AC_SL1500_.jpg" },
+      { name: "Jogo de potes herméticos", image: "https://m.media-amazon.com/images/I/71wKqCh5ExL._AC_SL1500_.jpg" },
+      { name: "Jarra de suco (Vidro)", image: "https://m.media-amazon.com/images/I/61cZt7v2ydL._AC_SL1500_.jpg" },
+      { name: "Jogo de frigideiras (Antiaderente)", image: "https://m.media-amazon.com/images/I/71K9B2ZcnUL._AC_SL1500_.jpg" },
+      { name: "Cobre leito (Queen)", image: "https://m.media-amazon.com/images/I/71U9m7wZ0xL._AC_SL1500_.jpg" }
     ];
 
     const giftList = document.getElementById('giftList');
