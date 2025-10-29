@@ -1,182 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Presentes — Cris & Edson</title>
-  <style>
-    body {
-      font-family: 'Georgia', serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #fffbea, #f6e3b4);
-      color: #2c2c2c;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Presentes — Cris & Edson 💍</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(to bottom, #fff8f0, #fffdf8);
+    color: #4a3b2b;
+    overflow-x: hidden;
+    position: relative;
+  }
 
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
+  /* 🌸 Animação de fundo floral */
+  body::before, body::after {
+    content: "";
+    position: absolute;
+    background-image: url('https://i.imgur.com/lzRjSmI.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    animation: flutuar 30s infinite linear alternate;
+  }
 
-    header h1 {
-      color: #bfa14a;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
+  body::before {
+    top: -50px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+  }
 
-    header p {
-      font-size: 1rem;
-      color: #444;
-    }
+  body::after {
+    bottom: -50px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    animation-delay: 10s;
+  }
 
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
+  @keyframes flutuar {
+    from { transform: translateY(0px) rotate(0deg); }
+    to { transform: translateY(15px) rotate(5deg); }
+  }
 
-    .gift-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      background: #fffdf7;
-      border: 1px solid #e6d59e;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
+  header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: rgba(255,255,255,0.9);
+    border-bottom: 3px solid #d4af37;
+    border-radius: 0 0 25px 25px;
+  }
 
-    .gift-card img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #f3e5a3;
-      margin-right: 1rem;
-    }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: #bfa14a;
+    margin-bottom: 0.3em;
+  }
 
-    .gift-info {
-      flex: 1;
-      min-width: 250px;
-    }
+  p.subtitle {
+    font-size: 1.1em;
+    color: #5a4b32;
+    margin-top: 0;
+  }
 
-    .gift-info h3 {
-      margin: 0;
-      color: #2c2c2c;
-    }
+  main {
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
 
-    .gift-info p {
-      color: #7a7a7a;
-      margin: 0.3rem 0;
-    }
+  .gift-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
 
-    .status {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      background: #e4d18f;
-      color: #fff;
-    }
+  .gift {
+    background: #fffdf8;
+    border: 2px solid #e7d5a4;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+  }
 
-    button {
-      background: #bfa14a;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
+  .gift:hover {
+    transform: scale(1.03);
+  }
 
-    button:hover {
-      background: #a58d3b;
-    }
+  .gift img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #444;
-    }
+  .gift h3 {
+    margin: 10px;
+    font-size: 1em;
+    color: #3e2d17;
+    text-align: center;
+  }
 
-    @media (max-width: 600px) {
-      .gift-card {
-        flex-direction: column;
-        text-align: center;
-      }
+  .gift button {
+    background: #d4af37;
+    border: none;
+    width: 85%;
+    margin: 10px auto 15px;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-      .gift-card img {
-        margin: 0 0 1rem 0;
-      }
-    }
-  </style>
+  .gift button:hover {
+    background: #b9962e;
+  }
+
+  .confirmar-presenca {
+    display: block;
+    text-align: center;
+    background: #bfa14a;
+    color: white;
+    font-size: 1em;
+    padding: 14px 25px;
+    border-radius: 10px;
+    margin: 40px auto 20px;
+    width: 240px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .confirmar-presenca:hover {
+    background: #a78d34;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #6a5c3b;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 1.8em; }
+    .gift img { height: 140px; }
+    .confirmar-presenca { width: 200px; font-size: 0.9em; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Lista de Presentes — Cris & Edson 💍</h1>
-    <p>Escolha um presente e confirme pelo WhatsApp.<br>Assim evitamos presentes repetidos e agradecemos com carinho!</p>
-  </header>
 
-  <div class="container" id="giftList"></div>
+<header>
+  <h1>Lista de Presentes</h1>
+  <p class="subtitle">Cris & Edson 💍</p>
+  <p>Escolha um presente e confirme direto no WhatsApp!</p>
+</header>
 
-  <footer>
-    Feito com 💛 para Cris & Edson — Confirmação via WhatsApp: <strong>79 9 9914-5044</strong>
-  </footer>
+<main>
+  <div class="gift-list">
 
-  <script>
-    const phone = "5579999145044";
-    const gifts = [
-      { name: "Garrafa térmica / café (Branca)", image: "https://images.unsplash.com/photo-1606813909361-4a19b6f8b0af?auto=format&fit=crop&w=500&q=60" },
-      { name: "Sanduicheira elétrica (Preta)", image: "https://images.unsplash.com/photo-1606819249685-5f6217b47a9f?auto=format&fit=crop&w=500&q=60" },
-      { name: "Liquidificador (Preto)", image: "https://images.unsplash.com/photo-1609981542213-4b0565e8f8a3?auto=format&fit=crop&w=500&q=60" },
-      { name: "Conjunto de copos", image: "https://images.unsplash.com/photo-1606813909361-4a19b6f8b0af?auto=format&fit=crop&w=500&q=60" },
-      { name: "Espremedor de frutas (Preto)", image: "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=500&q=60" },
-      { name: "Xícaras com pires (Brancas)", image: "https://images.unsplash.com/photo-1506619216599-9d16d0903dfd?auto=format&fit=crop&w=500&q=60" },
-      { name: "Jogo de potes herméticos", image: "https://images.unsplash.com/photo-1600282278399-c93a73f6b5f9?auto=format&fit=crop&w=500&q=60" },
-      { name: "Jarra de suco (Vidro)", image: "https://images.unsplash.com/photo-1565958011705-44e21150a37e?auto=format&fit=crop&w=500&q=60" },
-      { name: "Jogo de frigideiras (antiaderente)", image: "https://images.unsplash.com/photo-1584799585338-9a3f63b6f2b4?auto=format&fit=crop&w=500&q=60" },
-      { name: "Cobre leito (Queen)", image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=500&q=60" }
-    ];
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/61qDnhgM4UL._AC_SL1500_.jpg" alt="Garrafa térmica branca">
+      <h3>Garrafa térmica branca</h3>
+      <button onclick="confirmarPresente('Garrafa térmica branca')">Presentear</button>
+    </div>
 
-    const giftList = document.getElementById('giftList');
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/61bCzIkgWQL._AC_SL1500_.jpg" alt="Sanduicheira elétrica preta">
+      <h3>Sanduicheira elétrica preta</h3>
+      <button onclick="confirmarPresente('Sanduicheira elétrica preta')">Presentear</button>
+    </div>
 
-    gifts.forEach(gift => {
-      const card = document.createElement('div');
-      card.classList.add('gift-card');
-      card.innerHTML = `
-        <img src="${gift.image}" alt="${gift.name}">
-        <div class="gift-info">
-          <h3>${gift.name}</h3>
-          <p class="status">Disponível</p>
-          <button>Escolher este presente</button>
-        </div>
-      `;
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/61uXspP2CML._AC_SL1500_.jpg" alt="Liquidificador preto">
+      <h3>Liquidificador preto</h3>
+      <button onclick="confirmarPresente('Liquidificador preto')">Presentear</button>
+    </div>
 
-      const button = card.querySelector('button');
-      const status = card.querySelector('.status');
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/71ybDyCeHhL._AC_SL1500_.jpg" alt="Jogo de copos de vidro">
+      <h3>Jogo de copos de vidro</h3>
+      <button onclick="confirmarPresente('Jogo de copos de vidro')">Presentear</button>
+    </div>
 
-      button.addEventListener('click', () => {
-        const nome = prompt("Digite seu nome para confirmar o presente 🎁:");
-        if (nome) {
-          status.textContent = `Presente escolhido por ${nome}`;
-          status.style.background = "#9dc183";
-          button.disabled = true;
-          button.style.background = "#ccc";
-          const mensagem = `Olá Cris & Edson! Eu, ${nome}, escolhi o presente ${gift.name} 🎁`;
-          const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensagem)}`;
-          window.open(url, "_blank");
-        }
-      });
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/61v4A5vU1qL._AC_SL1500_.jpg" alt="Espremedor de frutas preto">
+      <h3>Espremedor de frutas preto</h3>
+      <button onclick="confirmarPresente('Espremedor de frutas preto')">Presentear</button>
+    </div>
 
-      giftList.appendChild(card);
-    });
-  </script>
+    <div class="gift">
+      <img src="https://m.media-amazon.com/images/I/71iP0hZyE-L._AC_SL1500_.jpg" alt="Jogo de frigideiras antiaderentes">
+      <h3>Jogo de frigideiras antiaderentes</h3>
+      <button onclick="confirmarPresente('Jogo de frigideiras antiaderentes')">Presentear</button>
+    </div>
+
+  </div>
+
+  <a class="confirmar-presenca" href="https://wa.me/5579999145044?text=Olá%2C%20Cris%20e%20Edson!%20Confirmo%20minha%20presença%20no%20casamento.%20💍" target="_blank">
+    Confirmar Presença 💌
+  </a>
+</main>
+
+<footer>
+  <p>Com carinho, Cris & Edson 💕</p>
+</footer>
+
+<script>
+  function confirmarPresente(item) {
+    const msg = `Olá, Cris & Edson! Gostaria de presentear com: ${item}. 💝`;
+    const telefone = "5579999145044";
+    const link = `https://wa.me/${telefone}?text=${encodeURIComponent(msg)}`;
+    window.open(link, "_blank");
+  }
+</script>
+
 </body>
 </html>
