@@ -10,49 +10,19 @@
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
-    background: linear-gradient(to bottom, #fff8f0, #fffdf8);
+    background: linear-gradient(to bottom, #fffdf8, #fff8f0);
     color: #4a3b2b;
     overflow-x: hidden;
     position: relative;
   }
 
-  /* 🌸 Animação de fundo floral */
-  body::before, body::after {
-    content: "";
-    position: absolute;
-    background-image: url('https://i.imgur.com/lzRjSmI.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.08;
-    animation: flutuar 30s infinite linear alternate;
-  }
-
-  body::before {
-    top: -50px;
-    left: -100px;
-    width: 400px;
-    height: 400px;
-  }
-
-  body::after {
-    bottom: -50px;
-    right: -100px;
-    width: 400px;
-    height: 400px;
-    animation-delay: 10s;
-  }
-
-  @keyframes flutuar {
-    from { transform: translateY(0px) rotate(0deg); }
-    to { transform: translateY(15px) rotate(5deg); }
-  }
-
   header {
     text-align: center;
     padding: 40px 20px 20px;
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.95);
     border-bottom: 3px solid #d4af37;
     border-radius: 0 0 25px 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
   }
 
   h1 {
@@ -71,7 +41,7 @@
   main {
     max-width: 900px;
     margin: 20px auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffffd9;
     border-radius: 18px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 20px;
@@ -152,10 +122,33 @@
     margin-bottom: 40px;
   }
 
+  /* 🔊 Botão som */
+  #sound-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #d4af37;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 1.6em;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 1000;
+  }
+
+  #sound-btn:hover {
+    background: #b9962e;
+  }
+
   @media (max-width: 480px) {
     h1 { font-size: 1.8em; }
     .gift img { height: 140px; }
     .confirmar-presenca { width: 200px; font-size: 0.9em; }
+    #sound-btn { width: 50px; height: 50px; font-size: 1.3em; }
   }
 </style>
 </head>
@@ -217,7 +210,29 @@
   <p>Com carinho, Cris & Edson 💕</p>
 </footer>
 
+<!-- 🎵 Música de fundo -->
+<audio id="musica-fundo" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c3d004bb0.mp3?filename=romantic-background-music-110403.mp3" type="audio/mpeg">
+</audio>
+
+<button id="sound-btn" onclick="toggleSom()">🔊</button>
+
 <script>
+  let tocando = false;
+  const musica = document.getElementById('musica-fundo');
+  const botao = document.getElementById('sound-btn');
+
+  function toggleSom() {
+    if (tocando) {
+      musica.pause();
+      botao.textContent = '🔇';
+    } else {
+      musica.play();
+      botao.textContent = '🔊';
+    }
+    tocando = !tocando;
+  }
+
   function confirmarPresente(item) {
     const msg = `Olá, Cris & Edson! Gostaria de presentear com: ${item}. 💝`;
     const telefone = "5579999145044";
