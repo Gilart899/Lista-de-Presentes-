@@ -3,242 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Presentes — Cris & Edson 💍</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<title>Convite GilFest</title>
 <style>
   body {
     margin: 0;
-    padding: 0;
-    font-family: 'Open Sans', sans-serif;
-    background: linear-gradient(to bottom, #fffdf8, #fff8f0);
-    color: #4a3b2b;
-    overflow-x: hidden;
-    position: relative;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom, #fff8f0, #fff);
+    background-image: url('https://i.imgur.com/kJkFk1X.png');
+    background-size: cover;
+    background-position: center;
+    color: #4d3b28;
   }
 
   header {
     text-align: center;
-    padding: 40px 20px 20px;
-    background: rgba(255,255,255,0.95);
-    border-bottom: 3px solid #d4af37;
-    border-radius: 0 0 25px 25px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    padding: 20px;
+    background: linear-gradient(135deg, #d4af37, #f5e6b3);
+    color: white;
+    position: relative;
+  }
+
+  header img {
+    width: 50px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
   }
 
   h1 {
-    font-family: 'Playfair Display', serif;
     font-size: 2em;
-    color: #bfa14a;
-    margin-bottom: 0.3em;
+    margin: 0;
   }
 
-  p.subtitle {
-    font-size: 1.1em;
-    color: #5a4b32;
-    margin-top: 0;
-  }
-
-  main {
-    max-width: 900px;
+  .container {
+    max-width: 800px;
     margin: 20px auto;
-    background: #ffffffd9;
-    border-radius: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding: 20px;
   }
 
-  .gift-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
+  .present {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
   }
 
-  .gift {
-    background: #fffdf8;
-    border: 2px solid #e7d5a4;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease;
-  }
-
-  .gift:hover {
-    transform: scale(1.03);
-  }
-
-  .gift img {
-    width: 100%;
-    height: 160px;
+  .present img {
+    width: 120px;
+    height: 120px;
     object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
   }
 
-  .gift h3 {
-    margin: 10px;
-    font-size: 1em;
-    color: #3e2d17;
-    text-align: center;
+  .present-info {
+    flex: 1;
   }
 
-  .gift button {
+  .present-info h3 {
+    margin: 0 0 5px;
+    color: #5a4328;
+  }
+
+  .present-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+
+  button {
     background: #d4af37;
     border: none;
-    width: 85%;
-    margin: 10px auto 15px;
-    display: block;
-    padding: 10px;
-    border-radius: 8px;
     color: white;
-    font-size: 0.95em;
+    padding: 10px 18px;
+    border-radius: 30px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
+    font-weight: bold;
   }
 
-  .gift button:hover {
-    background: #b9962e;
+  button:hover {
+    background: #b8962e;
   }
 
-  .confirmar-presenca {
+  .confirmar {
     display: block;
+    margin: 30px auto;
+    background: #198754;
     text-align: center;
-    background: #bfa14a;
-    color: white;
-    font-size: 1em;
-    padding: 14px 25px;
-    border-radius: 10px;
-    margin: 40px auto 20px;
-    width: 240px;
-    text-decoration: none;
-    transition: background 0.3s;
-  }
-
-  .confirmar-presenca:hover {
-    background: #a78d34;
   }
 
   footer {
     text-align: center;
-    font-size: 0.9em;
-    color: #6a5c3b;
-    margin-bottom: 40px;
+    margin-top: 40px;
+    color: #777;
   }
 
-  /* 🔊 Botão som */
-  #sound-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #d4af37;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    color: white;
-    font-size: 1.6em;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    cursor: pointer;
-    transition: background 0.3s;
-    z-index: 1000;
-  }
+  @media (max-width: 600px) {
+    .present {
+      flex-direction: column;
+      text-align: center;
+    }
 
-  #sound-btn:hover {
-    background: #b9962e;
-  }
-
-  @media (max-width: 480px) {
-    h1 { font-size: 1.8em; }
-    .gift img { height: 140px; }
-    .confirmar-presenca { width: 200px; font-size: 0.9em; }
-    #sound-btn { width: 50px; height: 50px; font-size: 1.3em; }
+    .present img {
+      margin: 0 0 10px;
+    }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Lista de Presentes</h1>
-  <p class="subtitle">Cris & Edson 💍</p>
-  <p>Escolha um presente e confirme direto no WhatsApp!</p>
+  <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg" alt="Bandeira do Brasil">
+  <h1>Convite GilFest 🎉</h1>
 </header>
 
-<main>
-  <div class="gift-list">
+<div class="container">
+  <h2 style="text-align:center; color:#b8962e;">Lista de Presentes</h2>
 
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/61qDnhgM4UL._AC_SL1500_.jpg" alt="Garrafa térmica branca">
-      <h3>Garrafa térmica branca</h3>
-      <button onclick="confirmarPresente('Garrafa térmica branca')">Presentear</button>
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1Shq4QG5TKG4SSYNi-ScoruOF0RuOWfna" alt="Presente 1">
+    <div class="present-info">
+      <h3>Garrafa Térmica Branca</h3>
+      <p>Presente elegante para manter bebidas sempre quentes ☕</p>
+      <button onclick="enviarWhatsApp('Garrafa Térmica Branca')">Escolher este presente</button>
     </div>
-
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/61bCzIkgWQL._AC_SL1500_.jpg" alt="Sanduicheira elétrica preta">
-      <h3>Sanduicheira elétrica preta</h3>
-      <button onclick="confirmarPresente('Sanduicheira elétrica preta')">Presentear</button>
-    </div>
-
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/61uXspP2CML._AC_SL1500_.jpg" alt="Liquidificador preto">
-      <h3>Liquidificador preto</h3>
-      <button onclick="confirmarPresente('Liquidificador preto')">Presentear</button>
-    </div>
-
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/71ybDyCeHhL._AC_SL1500_.jpg" alt="Jogo de copos de vidro">
-      <h3>Jogo de copos de vidro</h3>
-      <button onclick="confirmarPresente('Jogo de copos de vidro')">Presentear</button>
-    </div>
-
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/61v4A5vU1qL._AC_SL1500_.jpg" alt="Espremedor de frutas preto">
-      <h3>Espremedor de frutas preto</h3>
-      <button onclick="confirmarPresente('Espremedor de frutas preto')">Presentear</button>
-    </div>
-
-    <div class="gift">
-      <img src="https://m.media-amazon.com/images/I/71iP0hZyE-L._AC_SL1500_.jpg" alt="Jogo de frigideiras antiaderentes">
-      <h3>Jogo de frigideiras antiaderentes</h3>
-      <button onclick="confirmarPresente('Jogo de frigideiras antiaderentes')">Presentear</button>
-    </div>
-
   </div>
 
-  <a class="confirmar-presenca" href="https://wa.me/5579999145044?text=Olá%2C%20Cris%20e%20Edson!%20Confirmo%20minha%20presença%20no%20casamento.%20💍" target="_blank">
-    Confirmar Presença 💌
-  </a>
-</main>
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1VUSNcfNmsJXNmAlyZ_y_nFMjspj7REJu" alt="Presente 2">
+    <div class="present-info">
+      <h3>Sanduicheira Elétrica</h3>
+      <p>Perfeita para preparar lanches rápidos e deliciosos 🥪</p>
+      <button onclick="enviarWhatsApp('Sanduicheira Elétrica')">Escolher este presente</button>
+    </div>
+  </div>
+
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1QPEoEEcvsS3GZc1LeueDbIfeWYPnO4la" alt="Presente 3">
+    <div class="present-info">
+      <h3>Liquidificador Preto</h3>
+      <p>Para vitaminas, sucos e receitas incríveis 🥤</p>
+      <button onclick="enviarWhatsApp('Liquidificador Preto')">Escolher este presente</button>
+    </div>
+  </div>
+
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1l9xw3rkYzWUuNRdvzQrCDG2hXAlsYJfJ" alt="Presente 4">
+    <div class="present-info">
+      <h3>Conjunto de Copos</h3>
+      <p>Um toque de elegância à mesa 🍷</p>
+      <button onclick="enviarWhatsApp('Conjunto de Copos')">Escolher este presente</button>
+    </div>
+  </div>
+
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1aqvUDXClSZVPzwUMHAwn0XJmdzvRmyhL" alt="Presente 5">
+    <div class="present-info">
+      <h3>Jogo de Frigideiras</h3>
+      <p>Conjunto antiaderente para refeições perfeitas 🍳</p>
+      <button onclick="enviarWhatsApp('Jogo de Frigideiras')">Escolher este presente</button>
+    </div>
+  </div>
+
+  <div class="present">
+    <img src="https://drive.google.com/uc?export=view&id=1l1QVbaKd2PZKig0dOgHd9qd-QQ13EzQF" alt="Presente 6">
+    <div class="present-info">
+      <h3>Kit Toalhas de Banho</h3>
+      <p>Toque macio e conforto para o dia a dia 🛁</p>
+      <button onclick="enviarWhatsApp('Kit Toalhas de Banho')">Escolher este presente</button>
+    </div>
+  </div>
+
+  <button class="confirmar" onclick="confirmarPresenca()">Confirmar Presença</button>
+</div>
 
 <footer>
-  <p>Com carinho, Cris & Edson 💕</p>
+  <p>Com carinho, Cris & Edson 💛</p>
 </footer>
 
-<!-- 🎵 Música de fundo -->
-<audio id="musica-fundo" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c3d004bb0.mp3?filename=romantic-background-music-110403.mp3" type="audio/mpeg">
-</audio>
-
-<button id="sound-btn" onclick="toggleSom()">🔊</button>
-
 <script>
-  let tocando = false;
-  const musica = document.getElementById('musica-fundo');
-  const botao = document.getElementById('sound-btn');
+function enviarWhatsApp(presente) {
+  const mensagem = encodeURIComponent(`Olá Cris & Edson! Eu escolhi o presente: ${presente} 🎁`);
+  window.open(`https://wa.me/5579999145044?text=${mensagem}`, '_blank');
+}
 
-  function toggleSom() {
-    if (tocando) {
-      musica.pause();
-      botao.textContent = '🔇';
-    } else {
-      musica.play();
-      botao.textContent = '🔊';
-    }
-    tocando = !tocando;
+function confirmarPresenca() {
+  const nome = prompt("Digite seu nome para confirmar sua presença:");
+  if (nome) {
+    const mensagem = encodeURIComponent(`Olá, sou ${nome}, confirmo minha presença na GilFest 🎉`);
+    window.open(`https://wa.me/5579999145044?text=${mensagem}`, '_blank');
   }
-
-  function confirmarPresente(item) {
-    const msg = `Olá, Cris & Edson! Gostaria de presentear com: ${item}. 💝`;
-    const telefone = "5579999145044";
-    const link = `https://wa.me/${telefone}?text=${encodeURIComponent(msg)}`;
-    window.open(link, "_blank");
-  }
+}
 </script>
 
 </body>
