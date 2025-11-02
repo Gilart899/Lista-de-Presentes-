@@ -179,84 +179,83 @@ input[type=text]{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ef}
 
     render();
   </script>
-  <!doctype html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Confirmar Presença 🎉</title>
   <style>
-    :root{
-      --size: 72px;
+    :root {
       --accent-1: #ff7a18;
       --accent-2: #ff4e50;
       --accent-3: #ff9a9e;
       --shadow: 0 8px 24px rgba(0,0,0,0.25);
       --text: #ffffff;
     }
-    body{
+    body {
       font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      margin:0;
-      min-height:100vh;
-      background:linear-gradient(180deg,#f8fafc,#ffffff);
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg,#f8fafc,#ffffff);
     }
 
     /* Botão flutuante */
-    .floating-confirm{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:9999;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .floating-confirm {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .fc-button{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:14px 18px;
-      border-radius:999px;
-      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      color:var(--text);
-      font-weight:700;
-      font-size:15px;
-      cursor:pointer;
-      border:none;
-      box-shadow:var(--shadow);
-      transition:transform .15s ease;
+    .fc-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      color: var(--text);
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease;
     }
 
-    .fc-button:hover{transform:translateY(-4px);}
-    .fc-button:active{transform:translateY(1px);}
-    .fc-emoji{
-      width:40px;
-      height:40px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      font-size:22px;
-      background:linear-gradient(180deg,var(--accent-3),#fff3);
-      box-shadow:0 6px 12px rgba(0,0,0,0.2);
+    .fc-button:hover { transform: translateY(-4px); }
+    .fc-button:active { transform: translateY(1px); }
+    .fc-emoji {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 22px;
+      background: linear-gradient(180deg,var(--accent-3),#fff3);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
-    /* Animação de ping */
-    .ping{
-      position:absolute;
-      right:12px;
-      bottom:12px;
-      width:16px;
-      height:16px;
-      border-radius:50%;
-      background:rgba(255,78,80,0.9);
-      box-shadow:0 0 0 0 rgba(255,78,80,0.4);
-      animation:ping 1.8s infinite;
+    /* Efeito de pulsar */
+    .ping {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(255,78,80,0.9);
+      box-shadow: 0 0 0 0 rgba(255,78,80,0.4);
+      animation: ping 1.8s infinite;
     }
-    @keyframes ping{
-      0%{transform:scale(.6);opacity:.9;}
-      70%{transform:scale(1.9);opacity:0;}
-      100%{opacity:0;}
+    @keyframes ping {
+      0% { transform: scale(.6); opacity: .9; }
+      70% { transform: scale(1.9); opacity: 0; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
@@ -264,25 +263,20 @@ input[type=text]{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ef}
 
   <!-- Botão Flutuante -->
   <div class="floating-confirm">
-    <button class="fc-button" id="confirmarBtn">
+    <a
+      class="fc-button"
+      href="https://wa.me/5579999145044?text=oi%20gil,%20confirmo%20sim%20minha%20presen%C3%A7a%20%F0%9F%8E%89"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span class="fc-emoji">🎉</span>
       Confirmar presença
-    </button>
+    </a>
     <div class="ping"></div>
   </div>
 
-  <script>
-    // Configuração do WhatsApp e mensagem
-    const WHATSAPP_NUMBER = "5579999145044"; // código do Brasil + número
-    const MESSAGE = "oi gil, confirmo sim minha presença 🎉";
-
-    document.getElementById("confirmarBtn").addEventListener("click", () => {
-      const encodedMsg = encodeURIComponent(MESSAGE);
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
-      window.open(url, "_blank");
-    });
-  </script>
-
+</body>
+</html>
 </body>
 </html>
 </body>
