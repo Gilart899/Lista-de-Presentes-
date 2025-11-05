@@ -483,35 +483,78 @@ input[type=text]{flex:1;padding:10px;border-radius:8px;border:1px solid #e6e9ef}
   </div>
 
 </body>
-  <!-- 🧊 CONTADOR REGRESSIVO FROZEN -->
-<div id="contador-frozen" style="text-align:center; margin:30px 0;">
+  <!-- 🧊 CONTADOR CIRCULAR FROZEN -->
+<div id="contador-frozen" style="text-align:center; margin:40px 0; font-family:'Poppins', sans-serif;">
   <h2 style="
       color:#0AB1FF;
-      font-family: 'Comic Sans MS', cursive;
-      text-shadow: 2px 2px 4px #fff;
+      font-size:1.8rem;
+      margin-bottom:20px;
+      text-shadow:1px 1px 3px #fff;
   ">
-    ❄️ Faltam para o evento ❄️
+    ❄️ Contagem Regressiva para o Grande Dia ❄️
   </h2>
 
-  <div id="timer" style="
-      display:inline-block;
-      background: linear-gradient(180deg, #AEEBFF 0%, #5BB6FF 100%);
-      color:#003366;
-      padding:20px 30px;
-      border-radius:20px;
-      font-size:1.8rem;
-      font-weight:bold;
-      box-shadow:0 0 15px rgba(0,0,0,0.2);
-  ">
-    <span id="dias">00</span>d :
-    <span id="horas">00</span>h :
-    <span id="minutos">00</span>m :
-    <span id="segundos">00</span>s
+  <div id="timer" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <!-- Dias -->
+    <div style="
+        background:radial-gradient(circle at 30% 30%, #DFF7FF, #76C8FF);
+        color:#004C80;
+        width:100px; height:100px;
+        border-radius:50%;
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        box-shadow:0 0 15px rgba(0,0,0,0.2);
+        font-weight:bold;
+    ">
+      <span id="dias" style="font-size:1.8rem;">00</span>
+      <small style="font-size:0.8rem;">Dias</small>
+    </div>
+
+    <!-- Horas -->
+    <div style="
+        background:radial-gradient(circle at 30% 30%, #E6F5FF, #5BB6FF);
+        color:#003366;
+        width:100px; height:100px;
+        border-radius:50%;
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        box-shadow:0 0 15px rgba(0,0,0,0.2);
+        font-weight:bold;
+    ">
+      <span id="horas" style="font-size:1.8rem;">00</span>
+      <small style="font-size:0.8rem;">Horas</small>
+    </div>
+
+    <!-- Minutos -->
+    <div style="
+        background:radial-gradient(circle at 30% 30%, #DFF7FF, #76C8FF);
+        color:#004C80;
+        width:100px; height:100px;
+        border-radius:50%;
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        box-shadow:0 0 15px rgba(0,0,0,0.2);
+        font-weight:bold;
+    ">
+      <span id="minutos" style="font-size:1.8rem;">00</span>
+      <small style="font-size:0.8rem;">Min</small>
+    </div>
+
+    <!-- Segundos -->
+    <div style="
+        background:radial-gradient(circle at 30% 30%, #E6F5FF, #5BB6FF);
+        color:#003366;
+        width:100px; height:100px;
+        border-radius:50%;
+        display:flex; flex-direction:column; align-items:center; justify-content:center;
+        box-shadow:0 0 15px rgba(0,0,0,0.2);
+        font-weight:bold;
+    ">
+      <span id="segundos" style="font-size:1.8rem;">00</span>
+      <small style="font-size:0.8rem;">Seg</small>
+    </div>
   </div>
 </div>
 
 <script>
-// 🕒 CONFIGURE AQUI A DATA DO EVENTO
+// ⏰ CONFIGURE AQUI A DATA DO EVENTO
 const dataEvento = new Date("2025-12-31T23:59:59").getTime();
 
 const contador = setInterval(() => {
@@ -520,7 +563,8 @@ const contador = setInterval(() => {
 
   if (distancia < 0) {
     clearInterval(contador);
-    document.getElementById("timer").innerHTML = "🎉 O grande dia chegou! 🎂";
+    document.getElementById("contador-frozen").innerHTML = `
+      <h2 style="color:#0AB1FF; text-shadow:1px 1px 3px #fff;">🎉 O grande dia chegou! 🎂</h2>`;
     return;
   }
 
@@ -534,6 +578,7 @@ const contador = setInterval(() => {
   document.getElementById("minutos").innerText = minutos.toString().padStart(2, '0');
   document.getElementById("segundos").innerText = segundos.toString().padStart(2, '0');
 }, 1000);
+        </script>
 </script>
 </html>
 </body>
